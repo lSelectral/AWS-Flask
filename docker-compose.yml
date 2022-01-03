@@ -1,0 +1,24 @@
+# This file created for local docker testing
+
+version: '3.8'
+
+services:
+  aws-flask-selectra:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+        - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+        - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+        - FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
+    container_name: aws-flask-selectra
+    ports:
+      - 5000:5000
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
+    # bridge - connect to docker container from localhost
+    network_mode: bridge
